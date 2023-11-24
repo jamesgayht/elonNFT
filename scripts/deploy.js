@@ -7,21 +7,29 @@
 const hre = require("hardhat");
 
 async function main() {
-  console.log("Deploying Contract... ");
-
   // new contract is deployed and stored in the variable
-  const elon = await hre.ethers.deployContract("ElonNFT");
+  // const elon = await hre.ethers.deployContract("ElonNFT");
 
-  // logs the address of the deployed contract to the console 
-  console.log("Contract deployed to address: ", elon.target);
+  const ElonNFT = await hre.ethers.getContractFactory("ElonNFT");
+
+  console.log("Deploying Contract... ");
+  const elon = await ElonNFT.deploy();
+
+  // use deployment transaction to pay for the transaction fees
+  const txnHash = elon.deployTransaction.hash;
+  const txnReceipt = await hre.ethers.provider.waitForTransaction(txnHash);
+
+  // logs the address of the deployed contract to the console
+  // console.log("Contract deployed to address: ", elon.target);
+  console.log("Contract deployed to address:", txnReceipt.contractAddress);
 
   // updated the deployment script for minting NFT in step 5
   console.log("Minting NFT...");
 
-  // mint a new NFT 
+  // mint a new NFT
   let txn = await elon.mintNFT();
 
-  // waits until the transaction is mined and the NFT is minted 
+  // waits until the transaction is mined and the NFT is minted
   await txn.wait();
 }
 

@@ -1,7 +1,9 @@
 ## How to use
 
 npx hardhat compile
-npx hardhat run scripts/run.js
+npx hardhat run scripts/deploy.js
+npx hardhat run scripts/deploy.js --network mumbai
+
 
 ## 1. Setting up the environment for our Elon NFT
 
@@ -63,5 +65,16 @@ https://docs.openzeppelin.com/contracts/4.x/api/token/erc721
 - once done head over to this link https://chainlist.org/chain/80001
 - connect your metamask wallet and add the test MATIC $$ to your wallet from https://mumbaifaucet.com/ 
 
-## 8. get your private metamask key and 
+## 8. get your private metamask key and Alchemy API & APP HTTP URL to be set up in dotenv
+- npm install dotenv --save --force
+- touch .env
+API_URL_KEY="YOUR_ALCHEMY_APP_HTTP_URL"
+PRIVATE_KEY="YOUR_METAMASK_PRIVATE_KEY"
+API_KEY="YOUR_ALCHEMY_APP_KEY"
+ 
+## 9. install ethers.js library for us to interact with the ethereum network 
+- npm install --save-dev @nomiclabs/hardhat-ethers ethers --force
+
+
+
 
